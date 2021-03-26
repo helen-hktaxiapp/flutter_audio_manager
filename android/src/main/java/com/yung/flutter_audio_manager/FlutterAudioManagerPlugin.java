@@ -25,6 +25,7 @@ public class FlutterAudioManagerPlugin implements FlutterPlugin, MethodCallHandl
   private static MethodChannel channel;
   private static AudioManager audioManager;
   private static Context activeContext;
+  private AudioDeviceInfo audioDeviceInfo;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -52,6 +53,10 @@ public class FlutterAudioManagerPlugin implements FlutterPlugin, MethodCallHandl
     public void onChanged() {
       channel.invokeMethod("inputChanged", 1);
     }
+
+    // public void onAvailableInputChanged() {
+    //   channel.invokeMethod("availableInputChanged", 1);
+    // }
   };
 
   @Override
@@ -102,9 +107,10 @@ public class FlutterAudioManagerPlugin implements FlutterPlugin, MethodCallHandl
     listener.onChanged();
     return true;
   }
-
+  
   private List<String> getCurrentOutput() {
     List<String> info = new ArrayList();
+    // audioDeviceInfo = audioManager.getDeviceForCommunication();
     if (audioManager.isSpeakerphoneOn()) {
       info.add("Speaker");
       info.add("2");
@@ -145,6 +151,7 @@ public class FlutterAudioManagerPlugin implements FlutterPlugin, MethodCallHandl
     if (audioManager.isBluetoothScoOn()) {
       list.add(Arrays.asList("Bluetooth", "4"));
     }
+    // listener.onAvailableInputChanged();
     return list;
   }
 
