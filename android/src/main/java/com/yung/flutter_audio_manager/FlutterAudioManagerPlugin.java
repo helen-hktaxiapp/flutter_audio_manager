@@ -25,7 +25,6 @@ public class FlutterAudioManagerPlugin implements FlutterPlugin, MethodCallHandl
   private static MethodChannel channel;
   private static AudioManager audioManager;
   private static Context activeContext;
-  private AudioDeviceInfo audioDeviceInfo;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
